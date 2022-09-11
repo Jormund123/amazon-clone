@@ -2,19 +2,20 @@ import "./App.css";
 import Header from "./Header/Header";
 import Home from "./Home/Home";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Checkout from "./Checkout/Checkout";
 
 function App() {
     return (
         <BrowserRouter>
             {/* BEM */}
             <div className='App'>
+                <Header />
                 <Routes>
                     <Route
                         path='/checkout'
                         element={
                             <>
-                                <Header />
-                                <h1>I am a checkout</h1>
+                                <Checkout />
                             </>
                         }
                     />
@@ -22,7 +23,6 @@ function App() {
                         path='/'
                         element={
                             <>
-                                <Header />
                                 <Home />
                             </>
                         }
