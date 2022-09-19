@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Header.css";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 import { Link } from "react-router-dom";
 import { useStateValue } from "../StateProvider";
 import { auth } from "../firebase";
-
+import AOS from "aos";
+import "aos/dist/aos.css";
 function Header() {
     const [{ basket, user }, dispatch] = useStateValue();
+    useEffect(() => {
+        AOS.init({ duration: 1000 });
+    }, []);
 
     const handleAuthentication = () => {
         if (user) {
@@ -15,7 +19,7 @@ function Header() {
         }
     };
     return (
-        <div className='header'>
+        <div data-aos='fade-down' className='header'>
             <Link to='/'>
                 <img className='header__logo' src='http://pngimg.com/uploads/amazon/amazon_PNG11.png' alt='' />
             </Link>
@@ -26,7 +30,7 @@ function Header() {
             <div className='header__nav'>
                 <Link to={!user && "/login"}>
                     <div onClick={handleAuthentication} className='header__option'>
-                        <span className='header__optionLineOne'>{user ? `Hello, ${user.email}` : "Hello User"} </span>
+                        <span className='header__optionLineOne'>{user ? `Hello, ${user?.email}` : "Hello Guest"} </span>
                         <span className='header__optionLineTwo'>{user ? "Sign Out" : "Sign In"}</span>
                     </div>
                 </Link>

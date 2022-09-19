@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CheckoutProduct from "../CheckoutProduct/CheckoutProduct";
 import Subtotal from "../Subtotal/Subtotal";
 import { useStateValue } from "../StateProvider";
 import "./Checkout.css";
-
+import AOS from "aos";
+import "aos/dist/aos.css";
 function Checkout() {
+    useEffect(() => {
+        AOS.init({ duration: 1000 });
+    }, []);
     const [{ basket }, dispatch] = useStateValue();
     return (
-        <div className='checkout'>
+        <div data-aos='flip-left' data-aos-delay='100' data-aos-anchor='.example-selector' className='checkout'>
             <div className='checkout__left'>
                 <img
                     className='checkout__ad'
